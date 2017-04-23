@@ -9,6 +9,7 @@
     <link href="{% static "css/get_restaurant_styles.css" %}" type='text/css'>
 </head>
 <body>
+
     <div class="container">
         <div id="rest-name"></div>
         <div id="rest-image"></div>
@@ -18,23 +19,29 @@
                 Cuisine: <input id="cuisine" placeholder="Mexican, Thai, etc."><br><br>
                 Price Range: <input id="price" placeholder="$, $$, or $$$"><br><br>
 
-                <button id="submit">Submit</button>
-                <button id="restaurant">Click</button>
-
+                <button id="submit">Submit</button><br><br>
 
             <div id="results">
-                <h1 id="latitude"></h1>
-                <h1 id="longitude"></h1>
+
+                <div id="random">
+                    You should eat at: <h1 id="name"></h1>
+                    <img id="image" src=""></div>
+                <div id="address"></div>
+                <div id="website" style="display: none">
+                    <a id="web" href="" target="_blank">Visit Website</a>
+                </div>
 
             </div>
 
         </div>
 
     </div>
+        <div id="blank" style="display: none"></div>
+        <div id="blank2" style="display: none"></div>
 
     <!-- Script Tags -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD64gDwd84RCIDl3eNnpmzsvPD8u2u_UpY"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD64gDwd84RCIDl3eNnpmzsvPD8u2u_UpY&libraries=places"></script>
     <script type="text/javascript" src="{% static 'js/get_restaurant.js' %}"></script>
 
     <!-- Keys
