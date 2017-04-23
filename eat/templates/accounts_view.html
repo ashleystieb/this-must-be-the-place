@@ -1,0 +1,17 @@
+{%  extends 'base.html' %}
+
+{% block content %}
+    <h1>Accounts Listed by Username</h1>
+    <hr>
+
+    <ul>
+
+        {% for instance in list_all %}
+            <li>
+                <a href="{{ instance.username }}">{{ instance.username }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+
+{%  endblock content %}

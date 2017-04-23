@@ -1,0 +1,47 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EAT NOW</title>
+    <link href="{% static "css/get_restaurant_styles.css" %}" type='text/css'>
+</head>
+<body>
+    <div class="container">
+        <div id="rest-name"></div>
+        <div id="rest-image"></div>
+        <div id="rest-map"></div>
+        <div class="input">
+                Location: <input id="location" placeholder="City, State"><br><br>
+                Cuisine: <input id="cuisine" placeholder="Mexican, Thai, etc."><br><br>
+                Price Range: <input id="price" placeholder="$, $$, or $$$"><br><br>
+
+                <button id="submit">Submit</button>
+                <button id="restaurant">Click</button>
+
+
+            <div id="results">
+                <h1 id="latitude"></h1>
+                <h1 id="longitude"></h1>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Script Tags -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD64gDwd84RCIDl3eNnpmzsvPD8u2u_UpY"></script>
+    <script type="text/javascript" src="{% static 'js/get_restaurant.js' %}"></script>
+
+    <!-- Keys
+    JS PLACES API KEY = AIzaSyD64gDwd84RCIDl3eNnpmzsvPD8u2u_UpY
+    MAPS API KEY = AIzaSyCpkXptIGyLa_jIaStEFTxw3oO7Dq-nQbU
+    JS MAPS API KEY = AIzaSyDfwZii7p9ZyqnlQmx8vDgq4Oh_D7h9ZvU
+    -->
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+{%  extends 'base.html' %}
+
+{% block content %}
+<h1>Restaurants Listed by Name</h1>
+<ul>
+    {% for instance in all %}
+
+        <li>
+            <a href="{{ instance.slug }}">{{ instance.name }}</a>
+        </li>
+
+    {% endfor %}
+</ul>
+{% endblock content %}
