@@ -12,8 +12,8 @@
 
 $(document).ready(function () {
 
-    // Global variables
 
+    // Global variables
     var lat;
     var long;
     var restaurantsLow = [];
@@ -25,6 +25,7 @@ $(document).ready(function () {
     if (jQuery) {
         console.log('jQuery detected');
     }
+
 
     // Converts addresses to latitude longitude coordinates
 
@@ -47,11 +48,10 @@ $(document).ready(function () {
         // var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=5000&type=restaurant&keyword=mexican&key=AIzaSyD64gDwd84RCIDl3eNnpmzsvPD8u2u_UpY';
         var params = {
             'location': new google.maps.LatLng(lat, long),
-            'radius': '25000',
+            'radius': '16000',
             'type': 'restaurant',
             'keyword': keyword,
             'key': 'AIzaSyD64gDwd84RCIDl3eNnpmzsvPD8u2u_UpY',
-            'pagetoken': 'next_page_token'
         };
         service = new google.maps.places.PlacesService($('#blank').get(0));
         service.nearbySearch(params, function (results, status) {
@@ -65,20 +65,25 @@ $(document).ready(function () {
 
             for (i in results) {
 
-
                 if (results[i].price_level === 1 || results[i].price_level === 2) {
                     restaurantsLow.push(results[i]);
 
-                } else if (results[i].price_level === 3) {
+                } else if (results[i].price_level === 2 || results[i].price_level === 3) {
                     restaurantsMed.push(results[i]);
 
-                } else if (results[i].price_level === 4) {
+                } else if (results[i].price_level === 3 || results[i].price_level === 4) {
                     restaurantsHigh.push(results[i]);
 
                 } else {
                     restaurantsMed.push(results[i]);
                 }
             }
+
+            console.log(restaurantsLow);
+            console.log(restaurantsMed);
+            console.log(restaurantsHigh);
+
+
 
             // Randomly chooses restaurant based on desired price range
 
@@ -93,6 +98,13 @@ $(document).ready(function () {
 
             var placeid = place.place_id;
             getPlaceDetails(placeid);
+
+            var lat = place.geometry.location.lat();
+            var long = place.geometry.location.lng();
+
+            $('#googleMap').css({'display':'block'});
+            getMap(lat,long);
+
         });
     }
 
@@ -122,8 +134,17 @@ $(document).ready(function () {
                 $("#web").attr("href", results.url);
                 $('#website').css({'display':'block'});
             }
+
+            if (results.hasOwnProperty('rating')) {
+                $("#rating").html(results.rating);
+                $('#rate').css({'display':'inline'});
+            } else {
+                $('#rating').html('No rating');
+                $('#rate').css({'display':'inline'});
+            }
     });
     }
+
 
     function getResult(price) {
 
@@ -137,19 +158,19 @@ $(document).ready(function () {
             //var random = (Math.floor(Math.random() * restaurantsLow.length) + 1) - 1;
             //var lowChoice = restaurantsLow[random];
             $('#name').html(lowChoice.name);
-            console.log(restaurantsLow);
+            //console.log(restaurantsLow);
             return lowChoice;
 
         } else if (price === '$$' && restaurantsMed.length > 0) {
             var medChoice = (restaurantsMed[Math.floor(Math.random() * restaurantsMed.length)]);
             $('#name').html(medChoice.name);
-            console.log(restaurantsMed);
+            //console.log(restaurantsMed);
             return medChoice;
 
         } else if (price === '$$$' && restaurantsHigh.length > 0) {
             var highChoice = (restaurantsHigh[Math.floor(Math.random() * restaurantsHigh.length)]);
             $('#name').html(highChoice.name);
-            console.log(restaurantsHigh);
+            //console.log(restaurantsHigh);
             return highChoice;
 
         } else {
@@ -168,4 +189,26 @@ $(document).ready(function () {
             getRestaurant(lat, long, $cuisine);
         });
     });
+
 });
+
+function getMap(lat, long){
+    // Shows map centered on Portland, OR
+    var place = {lat: lat, lng: long};
+    var map = new google.maps.Map(document.getElementById('googleMap'), {
+        center: place,
+        zoom: 16
+
+    });
+    var marker = new google.maps.Marker({
+        position: place,
+        icon: {
+            path: google.maps.SymbolPath.BACKWARD_OPEN_ARROW,
+            scale: 10
+          },
+        map: map
+
+    });
+}
+
+
