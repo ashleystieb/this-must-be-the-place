@@ -48,7 +48,11 @@ $(document).ready(function () {
         // var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=5000&type=restaurant&keyword=mexican&key=AIzaSyD64gDwd84RCIDl3eNnpmzsvPD8u2u_UpY';
         var params = {
             'location': new google.maps.LatLng(lat, long),
+<<<<<<< HEAD
             'radius': '10000',
+=======
+            'radius': '16000',
+>>>>>>> 89bfaac996c1587c47a9a60f56890af16dee09ea
             'type': 'restaurant',
             'keyword': keyword,
             'key': 'AIzaSyD64gDwd84RCIDl3eNnpmzsvPD8u2u_UpY',
@@ -134,6 +138,14 @@ $(document).ready(function () {
                 $("#web").attr("href", results.url);
                 $('#website').css({'display':'block'});
             }
+
+            if (results.hasOwnProperty('rating')) {
+                $("#rating").html(results.rating);
+                $('#rate').css({'display':'inline'});
+            } else {
+                $('#rating').html('No rating');
+                $('#rate').css({'display':'inline'});
+            }
     });
     }
 
@@ -189,7 +201,11 @@ function getMap(lat, long){
     var place = {lat: lat, lng: long};
     var map = new google.maps.Map(document.getElementById('googleMap'), {
         center: place,
+<<<<<<< HEAD
         zoom: 12
+=======
+        zoom: 16
+>>>>>>> 89bfaac996c1587c47a9a60f56890af16dee09ea
 
     });
     var marker = new google.maps.Marker({

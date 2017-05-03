@@ -2,6 +2,7 @@
 
 {% block content %}
 
+<<<<<<< HEAD
 <div class="page-header">
             <h1>THIS MUST BE THE PLACE
                 <small>what do you want?</small>
@@ -9,3 +10,96 @@
         </div>
 
 {% endblock content %}
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>THIS MUST BE THE PLACE</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/get_restaurant_styles.css' %}">
+
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        <h1>THIS MUST BE THE PLACE
+            <small>what do you want?</small>
+        </h1>
+    </div>
+
+    <div class="input">
+        <label class="col-sm-2 control-label" for="formGroupInputLarge">What is your location?</label>
+        <input id="location" class="form-control input-lg" placeholder="City, State"><br><br>
+        <label class="col-sm-2 control-label" for="formGroupInputLarge">What are you in the mood for?</label>
+        <input id="cuisine" class="form-control input-lg" placeholder="Mexican, Thai, etc."><br><br>
+        <label class="col-sm-2 control-label" for="formGroupInputLarge">What is your price range?</label>
+        <input id="price" class="form-control input-lg" placeholder="$, $$, or $$$"><br><br>
+
+        <button id="submit" type="button" class="btn btn-default btn-lg" data-toggle="modal"
+                data-target=".bs-example-modal-lg"><span class="glyphicon glyphicon-thumbs-up
+" aria-hidden="true"></span> SUBMIT
+        </button>
+        <br><br>
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                            <h1 id="name" class="modal-title"></h1>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                            <div class="col-md-8">
+                                <img id="image" class="img-thumbnail" src="">
+
+                            </div>
+                            <div class="col-md-4">
+
+                                <div id="address"></div>
+                                <div id="website" style="display: none">
+                                    <a id="web" href="" target="_blank">Visit Website</a>
+                                </div>
+                                <br><br>
+                                <div id="googleMap" style="display: none"></div>
+                            </div>
+                                </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                        </div>
+                    </div>
+            </div>
+            <div id="blank" style="display: none"></div>
+            <div id="blank2" style="display: none"></div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Script Tags -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD64gDwd84RCIDl3eNnpmzsvPD8u2u_UpY&libraries=places&callback=getMap"
+        async defer></script>
+<script type="text/javascript" src="{% static 'js/get_restaurant.js' %}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+
+<!-- Keys
+JS PLACES API KEY = AIzaSyD64gDwd84RCIDl3eNnpmzsvPD8u2u_UpY
+MAPS API KEY = AIzaSyCpkXptIGyLa_jIaStEFTxw3oO7Dq-nQbU
+JS MAPS API KEY = AIzaSyDfwZii7p9ZyqnlQmx8vDgq4Oh_D7h9ZvU
+-->
+
+</body>
+</html>
+>>>>>>> 89bfaac996c1587c47a9a60f56890af16dee09ea

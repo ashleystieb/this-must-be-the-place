@@ -1,3 +1,3 @@
-# Random Restaurant Generator
+This Must be the Place
 
-This is a capstone project for PDX Code Guild. It gives the user a random restaurant based on location, price range, and type of cuisine. 
+A random restaurant generator based on user input of location, cuisine desired, and price range.
