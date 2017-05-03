@@ -1,54 +1,11 @@
-{% load static %}
+{%  extends 'base.html' %}
 
+{% block content %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>EAT NOW</title>
-    <link href="{% static "css/get_restaurant_styles.css" %}" type='text/css'>
-</head>
-<body>
-
-    <div class="container">
-        <div id="rest-name"></div>
-        <div id="rest-image"></div>
-        <div id="rest-map"></div>
-        <div class="input">
-                Location: <input id="location" placeholder="City, State"><br><br>
-                Cuisine: <input id="cuisine" placeholder="Mexican, Thai, etc."><br><br>
-                Price Range: <input id="price" placeholder="$, $$, or $$$"><br><br>
-
-                <button id="submit">Submit</button><br><br>
-
-            <div id="results">
-
-                <div id="random">
-                    You should eat at: <h1 id="name"></h1>
-                    <img id="image" src=""></div>
-                <div id="address"></div>
-                <div id="website" style="display: none">
-                    <a id="web" href="" target="_blank">Visit Website</a>
-                </div>
-
-            </div>
-
+<div class="page-header">
+            <h1>THIS MUST BE THE PLACE
+                <small>what do you want?</small>
+            </h1>
         </div>
 
-    </div>
-        <div id="blank" style="display: none"></div>
-        <div id="blank2" style="display: none"></div>
-
-    <!-- Script Tags -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD64gDwd84RCIDl3eNnpmzsvPD8u2u_UpY&libraries=places"></script>
-    <script type="text/javascript" src="{% static 'js/get_restaurant.js' %}"></script>
-
-    <!-- Keys
-    JS PLACES API KEY = AIzaSyD64gDwd84RCIDl3eNnpmzsvPD8u2u_UpY
-    MAPS API KEY = AIzaSyCpkXptIGyLa_jIaStEFTxw3oO7Dq-nQbU
-    JS MAPS API KEY = AIzaSyDfwZii7p9ZyqnlQmx8vDgq4Oh_D7h9ZvU
-    -->
-
-</body>
-</html>
+{% endblock content %}

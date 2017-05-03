@@ -16,16 +16,16 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from restaurant import views as restaurant_views
-from account import views
 from get_restaurant import views as result_views
-
+from account.views import my_view, create_person, logout_view
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^restaurants/$', restaurant_views.list_view, name='list_view'),
-    url(r'^accounts/$', views.accounts_view, name='accounts_view'),
-    url(r'^accounts/(?P<username>[\w.@+-]+)/$', views.profile_view, name='accounts_view.profile_view'),
     url(r'^restaurants/(?P<slug>[\w-]+)/', restaurant_views.item_view, name='item_view'),
-    url(r'^index/', result_views.return_restaurant, name='index'),
+    url(r'^home/', result_views.return_restaurant, name='home'),
+    url(r'^login$', my_view, name='user_login'),
+    url(r'^register$', create_person, name='register'),
+    url(r'^logout/$', logout_view, name='logout'),
 ]
