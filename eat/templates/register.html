@@ -18,32 +18,28 @@
 {% endblock head %}
 
 {% block content %}
-
      {{ block.super }}
 
     <div class="container">
-
-        <br><br>
+    <div class="jumbotron">
         <form class="form-register" action="{% url 'register' %}" method="POST">
             {% csrf_token %}
-            <h1 class="form-register-heading text-muted">REGISTER</h1>
+            <h1 class="form-register-heading text-muted">REGISTER</h1><br>
             <input name='username' type="text" class="form-control" placeholder="Username" required="" autofocus=""> Required. 150
-            characters or fewer. Letters, digits and @/./+/-/_ only.
-            <input name='first_name' type="text" class="form-control" placeholder="First name" required="" autofocus=""> Required. 150
-            <input name='last_name' type="text" class="form-control" placeholder="Last name" required="" autofocus=""> Required. 150
-            <input name='email' type="text" class="form-control" placeholder="E-mail address" required="" autofocus=""> Required. 150
+            characters or fewer. Letters, digits and @/./+/-/_ only.<br><br>
+            <input name='first_name' type="text" class="form-control" placeholder="First name" required="" autofocus=""><br>
+            <input name='last_name' type="text" class="form-control" placeholder="Last name" required="" autofocus=""><br>
+            <input name='email' type="text" class="form-control" placeholder="E-mail address" required="" autofocus=""><br>
             <input name='password1' type="password" class="form-control" placeholder="Password" required="">
-            Your password can't be too similar to your other personal information.
-            Your password must contain at least 8 characters.
-            Your password can't be a commonly used password.
-            Your password can't be entirely numeric.
+            Your password must contain at least 8 characters.<br><br>
             <input name='password2' type="password" class="form-control" placeholder="Password confirmation" required="">
-            Enter the same password as before, for verification.
+            Enter the same password as before, for verification.<br><br>
             <button class="btn btn-lg btn-default btn-block" type="submit">
                 Register
             </button>
         </form>
 
+    </div>
     </div>
 
 {% endblock content %}

@@ -4,6 +4,11 @@ body {
     background-color: #E1E1E1;
 }
 
+.jumbotron {
+    margin: 100px;
+    background-color: white;
+}
+
 .btn {
     outline: 0;
     border: none;
@@ -30,17 +35,17 @@ body {
 
 }
 
-.form-register {
+.form-edit {
     max-width: 500px;
     padding: 15px;
     margin: 0 auto;: 50 px;
 }
 
-.form-register .form-register-heading, .form-register {
+.form-edit .form-register-heading, .form-register {
     margin-bottom: 10px;
 }
 
-.form-register .form-control {
+.form-edit .form-control {
     position: relative;
     font-size: 16px;
     height: auto;
@@ -50,18 +55,11 @@ body {
     box-sizing: border-box;
 }
 
-.form-register .form-control:focus {
+.form-edit .form-control:focus {
     z-index: 2;
 }
 
-.form-register input[type="text"] {
-    margin-bottom: -1px;
-    border-top-style: solid;
-    border-right-style: solid;
-    border-left-style: solid;
-}
-
-.form-register input[type="password"] {
+.form-edit input[type="text"] {
     margin-bottom: 10px;
     border-top-style: solid;
     border-right-style: solid;
@@ -69,7 +67,7 @@ body {
     border-left-style: solid;
 }
 
-.form-register-heading {
+.form-edit-heading {
     color: #EE5F7A;
     text-align: center;
     text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
@@ -86,17 +84,12 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
     border: 1px solid #cbcbcb;
-    -webkit-text-fill-color: grey;
-    -webkit-box-shadow: 0 0 0px 1000px white inset;
-    transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: grey;
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .form-control:focus {
-    border-color: #B4F7C2;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(180, 247, 194, 0.6);
-}
-
-.jumbotron {
-    margin: 100px;
-    background-color: white;
+  border-color: #B4F7C2;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(180, 247, 194, 0.6);
 }

@@ -20,26 +20,23 @@
 
 
 {% block content %}
-
-    <div id="fullscreen_bg" class="fullscreen_bg"/>
     {{ block.super }}
-
+    <div id="fullscreen_bg" class="fullscreen_bg">
     <div class="container">
+    <div class="jumbotron">
+
         <form class="form-signin" action="{% url 'user_login' %}" method="POST">
             {% csrf_token %}
-
-            <h1 class="form-signin-heading text-muted">SIGN IN</h1>
+            <h1 class="form-signin-heading text-muted">LOGIN</h1><br>
             <input name='username' type="text" class="form-control" placeholder="Username" required="" autofocus="">
             <input name='password' type="password" class="form-control" placeholder="Password" required="">
             <button class="btn btn-lg btn-default btn-block" type="submit">
-                Sign In
+                Login
             </button>
             <a href="{% url 'register' %}">Not registered? Create an account.</a>
-
         </form>
-
-
     </div>
-
+    </div>
+    </div>
 
 {% endblock content %}

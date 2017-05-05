@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block head %}
+    {{ block.super }}
+    <title>THIS MUST BE THE PLACE</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/edit.css' %}">
+{% endblock head %}
+
+{% block content %}
+    {{ block.super }}
+    <div class="container">
+    <div class="jumbotron">
+        <br><br>
+        <form class="form-edit" action="" method="POST" enctype="multipart/form-data">
+            <h1 class="form-edit-heading text-muted">EDIT PROFILE</h1>
+            {% csrf_token %}
+            City: <input name='city' type="text" class="form-control" placeholder="City" autofocus="">
+            State: <input name='state' type="text" class="form-control" placeholder="State" autofocus="">
+            Country: <input name='country' type="text" class="form-control" placeholder="Country" autofocus="">
+            User Photo: <input type="file" name="profile_image">
+            <br><br>
+            <button class="btn btn-lg btn-default" type="submit" value="upload">Save</button>
+        </form>
+    </div>
+    </div>
+
+{% endblock content %}

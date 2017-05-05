@@ -1,0 +1,39 @@
+body {
+    background-color: #E1E1E1;
+}
+
+.img {
+    width: 256px;
+    height: 256px;
+    border-radius: 50px;
+}
+
+
+.jumbotron {
+    margin: 100px;
+    background-color: white;
+}
+
+.container .details {
+    background-color: white;
+
+}
+
+.details li {
+    list-style: none;
+    background-color: white;
+
+}
+
+li {
+    margin-bottom: 10px;
+
+}
+
+#edit {
+    text-align: right;
+}
+
+
+
+

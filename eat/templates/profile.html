@@ -1,7 +1,52 @@
-{%  extends 'base.html' %}
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+    {{ block.super }}
+    <title>THIS MUST BE THE PLACE</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+{% endblock head %}
 
 {% block content %}
-
-    <h1>Hello {{ object.first_name }}</h1>
+    {{ block.super }}
+    <div class="container">
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                    <img src="{{ photo }}" alt="user photo" class="img">
+                </div>
+                <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                    <div class="name">
+                        <h1>Hello {{ user.first_name }} {{ user.last_name }}</h1>
+                        <hr>
+                    </div>
+                    <div id="info">
+                        <ul class="container details">
+                            <li><p><span class="glyphicon glyphicon-envelope one"
+                                         style="width:50px;"></span>{{ user.email }}
+                            </p></li>
+                            <li><p><span class="glyphicon glyphicon-map-marker one"
+                                         style="width:50px;"></span>{{ profile.city }}, {{ profile.state }}, {{ profile.country }}
+                            </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="edit">
+                        <a href="{% url 'edit_profile' username=user.username %}">Edit Info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock content %}

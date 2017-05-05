@@ -16,35 +16,28 @@
               crossorigin="anonymous">
         <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
-
-
-
     {% endblock head %}
 </head>
 <body>
 
 
 {% block content %}
-
     <nav class="navbar navbar-right navbar-minimal animate" role="navigation">
     	<div class="navbar-toggler animate">
             <span class="menu-icon"></span></div>
         <ul class=" navbar-menu animate">
-                <li><a href="#">About</a></li>
-    			<li><a href="{% url 'home' %}">Search</a></li>
-				<li ><a href="#">Profile</a></li>
+                <li><a href="{% url 'index' %}">THIS MUST BE THE PLACE</a></li>
             {% if user.is_authenticated %}
+    			<li><a href="{% url 'search' %}">Search</a></li>
+				<li ><a href="{% url 'profile' username=user.username %}">Profile</a></li>
 				<li><a href="{% url 'logout' %}">Logout</a></li>
             {% else %}
                 <li><a href="{% url 'register' %}">Register</a></li>
-            <li><a href="{% url 'user_login' %}">Login</a></li>
+                <li><a href="{% url 'user_login' %}">Login</a></li>
             {% endif %}
 
         </ul>
 </nav>
-
-
-
 
 {% endblock content %}
 

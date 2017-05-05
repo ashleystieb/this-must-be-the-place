@@ -13,6 +13,17 @@ a:hover {
 }
 
 .container {
-    background-color: #E1E1E1;
+    /*background-color: #E1E1E1;*/
     color: 	#EE5F7A;
+}
+
+h1 {
+    color: #EE5F7A;
+    text-align: center;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.jumbotron {
+    margin: 100px;
+    background-color: white;
 }

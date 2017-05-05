@@ -15,17 +15,22 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.conf.urls.static import static
 from restaurant import views as restaurant_views
 from get_restaurant import views as result_views
-from account.views import my_view, create_person, logout_view
+from account.views import login_view, create_person, logout_view, profile_view, index_view, edit_profile
+from eat import settings
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^restaurants/$', restaurant_views.list_view, name='list_view'),
     url(r'^restaurants/(?P<slug>[\w-]+)/', restaurant_views.item_view, name='item_view'),
-    url(r'^home/', result_views.return_restaurant, name='home'),
-    url(r'^login$', my_view, name='user_login'),
+    url(r'^search/$', result_views.return_restaurant, name='search'),
+    url(r'^login$', login_view, name='user_login'),
     url(r'^register$', create_person, name='register'),
     url(r'^logout/$', logout_view, name='logout'),
-]
+    url(r'^profile/(?P<username>[\w.@+-]+)/$', profile_view, name='profile'),
+    url(r'^profile/(?P<username>[\w.@+-]+)/edit/$', edit_profile, name='edit_profile'),
+    url(r'^$', index_view, name='index'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

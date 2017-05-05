@@ -6,11 +6,10 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required(login_url='/login')
-def return_restaurant(request, username=None):
+def return_restaurant(request):
 
-    template = 'home.html'
-    context = {
+    template = 'search.html'
 
-    }
+    return render(request, template)
 
-    return render(request, template, context)
+

@@ -21,13 +21,10 @@
 {% block content %}
     {{ block.super }}
     <div class="container">
-    <br><br>
+    <div class="jumbotron">
     <div class="page-header">
-        <h1>THIS MUST BE THE PLACE
-            <small>what do you want?</small>
-        </h1>
-    </div>
-
+        <h1>THIS MUST BE THE PLACE</h1>
+    </div><br>
     <div class="input">
         <label class="control-label" for="formGroupInputLarge"><span
                 class="glyphicon glyphicon-map-marker"></span> What is your location?</label>
@@ -44,8 +41,7 @@
             </select>
             <br><br>
             <button id="submit" type="button" class="btn btn-default btn-lg" data-toggle="modal"
-                    data-target=".bs-example-modal-lg"><span class="glyphicon glyphicon-thumbs-up
-" aria-hidden="true"></span> SUBMIT
+                    data-target=".bs-example-modal-lg"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> SUBMIT
             </button>
             <a href="javascript:location.reload(true)">
                 <button id="refresh" type="button" class="btn btn-default btn-lg"><span
@@ -87,6 +83,7 @@
                 <div id="blank2" style="display: none"></div>
             </div>
         </div>
+    </div>
     </div>
 
 
