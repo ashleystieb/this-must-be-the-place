@@ -17,9 +17,39 @@ $(document).ready(function () {
     var lat;
     var long;
     var restaurantsLow = [];
-    var restaurantsMed = [];
     var restaurantsHigh = [];
+    var saved = [];
 
+    // Datalist storage
+    var cuisineList = document.getElementById('cuisines');
+    var cuisineInput = document.getElementById('cuisine');
+    var request = new XMLHttpRequest();
+
+    // Handle state changes for the request.
+    request.onreadystatechange = function (response) {
+        if (request.readyState === 4) {
+            if (request.status === 200) {
+                // Parse the JSON
+                var jsonOptions = JSON.parse(request.responseText);
+
+                // Loop over the JSON array.
+                jsonOptions.forEach(function (item) {
+                    // Create a new <option> element.
+                    var option = document.createElement('option');
+                    // Set the value using the item in the JSON array.
+                    option.value = item;
+                    // Add the <option> element to the <datalist>.
+                    cuisineList.appendChild(option);
+                });
+
+                // Update the placeholder text.
+                cuisineInput.placeholder = "Mexican, Thai, Pizza, etc.";
+            } else {
+                // An error occurred
+                cuisineInput.placeholder = "Couldn't load datalist options";
+            }
+        }
+    };
 
     console.log('JavaScript detected');
     if (jQuery) {
@@ -44,11 +74,11 @@ $(document).ready(function () {
         });
     }
 
-    function getRestaurant(lat, long, keyword) {
+    function getRestaurant(lat, long, radius, keyword) {
         // var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=5000&type=restaurant&keyword=mexican&key=AIzaSyD64gDwd84RCIDl3eNnpmzsvPD8u2u_UpY';
         var params = {
             'location': new google.maps.LatLng(lat, long),
-            'radius': '10000',
+            'radius': radius,
             'type': 'restaurant',
             'keyword': keyword,
             'key': 'AIzaSyD64gDwd84RCIDl3eNnpmzsvPD8u2u_UpY',
@@ -56,33 +86,28 @@ $(document).ready(function () {
         service = new google.maps.places.PlacesService($('#blank').get(0));
         service.nearbySearch(params, function (results, status) {
 
-            //console.log(results);
 
             // Checks price range for each result and adds to corresponding list
 
-            console.log(results);
+            // console.log(results);
 
 
             for (i in results) {
 
-                if (results[i].price_level === 1 || results[i].price_level === 2) {
+                if (results[i].price_level === 0 || results[i].price_level === 1) {
                     restaurantsLow.push(results[i]);
 
                 } else if (results[i].price_level === 2 || results[i].price_level === 3) {
-                    restaurantsMed.push(results[i]);
-
-                } else if (results[i].price_level === 3 || results[i].price_level === 4) {
                     restaurantsHigh.push(results[i]);
 
+
                 } else {
-                    restaurantsMed.push(results[i]);
+                    restaurantsLow.push(results[i]);
                 }
             }
 
-            console.log(restaurantsLow);
-            console.log(restaurantsMed);
-            console.log(restaurantsHigh);
-
+            // console.log(restaurantsLow);
+            // console.log(restaurantsHigh);
 
 
             // Randomly chooses restaurant based on desired price range
@@ -90,20 +115,29 @@ $(document).ready(function () {
             var $price = $('#price').val();
             var place = getResult($price);
 
+            $('#save').on('click', function () {
+                saved.push(place);
+                alert('Saved to favorites!');
+                console.log(saved);
+                $('#favorites_ul').html(saved);
+
+            });
+
             // Gets photo from randomly chosen restaurant
 
             var photo = place.photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500});
             $('#image').attr('src', photo);
-            console.log(photo);
+            // console.log(photo);
 
+            // Displays location on map
             var placeid = place.place_id;
             getPlaceDetails(placeid);
 
             var lat = place.geometry.location.lat();
             var long = place.geometry.location.lng();
 
-            $('#googleMap').css({'display':'block'});
-            getMap(lat,long);
+            $('#googleMap').css({'display': 'block'});
+            getMap(lat, long);
 
         });
     }
@@ -129,12 +163,35 @@ $(document).ready(function () {
             // Adds website link
             if (results.hasOwnProperty('website')) {
                 $("#web").attr("href", results.website);
-                $('#website').css({'display':'block'});
+                $('#website').css({'display': 'block'});
             } else {
                 $("#web").attr("href", results.url);
-                $('#website').css({'display':'block'});
+                $('#website').css({'display': 'block'});
             }
-    });
+
+            // Adds one review
+            if (results.hasOwnProperty('reviews')) {
+                $('#review').html('"' + results.reviews[0].text + '"');
+            } else {
+                $('#review').html('No reviews yet.');
+            }
+
+            // Adds phone number
+            if (results.hasOwnProperty('formatted_phone_number')) {
+                $('#phone').html(results.formatted_phone_number);
+            }
+
+            // if (results.hasOwnProperty('opening_hours')) {
+            //     $('#hours').html("<li>" + results.opening_hours.weekday_text + "</li>");
+            // }
+        });
+    }
+
+    function getRadius(miles) {
+
+        // Converts miles to meters
+        var meters = (miles * 1609.34);
+        return meters
     }
 
 
@@ -147,19 +204,13 @@ $(document).ready(function () {
             // Chooses random restaurant and adds it to HTML
 
             var lowChoice = (restaurantsLow[Math.floor(Math.random() * restaurantsLow.length)]);
-            //var random = (Math.floor(Math.random() * restaurantsLow.length) + 1) - 1;
             //var lowChoice = restaurantsLow[random];
             $('#name').html(lowChoice.name);
             //console.log(restaurantsLow);
             return lowChoice;
 
-        } else if (price === '$$' && restaurantsMed.length > 0) {
-            var medChoice = (restaurantsMed[Math.floor(Math.random() * restaurantsMed.length)]);
-            $('#name').html(medChoice.name);
-            //console.log(restaurantsMed);
-            return medChoice;
 
-        } else if (price === '$$$' && restaurantsHigh.length > 0) {
+        } else if (price === '$$' && restaurantsHigh.length > 0) {
             var highChoice = (restaurantsHigh[Math.floor(Math.random() * restaurantsHigh.length)]);
             $('#name').html(highChoice.name);
             //console.log(restaurantsHigh);
@@ -172,20 +223,42 @@ $(document).ready(function () {
     }
 
 
-    $('#submit').on('click', function () {
+    $('#search').on('click', function () {
         getMap(lat, long);
         var $address = $('#location').val();
         // Changes location to latitude and longitude
         $.when(getLatLong($address)).done(function () {
             var $cuisine = $('#cuisine').val();
+            var miles = $('#radius').val();
+            var radius = getRadius(miles);
             // Compiles a list of restaurants based on criteria
-            getRestaurant(lat, long, $cuisine);
+            getRestaurant(lat, long, radius, $cuisine);
         });
     });
 
+    // Shows next result on modal
+    $('#next').on('click', function () {
+        getMap(lat, long);
+        var $address = $('#location').val();
+        // Changes location to latitude and longitude
+        $.when(getLatLong($address)).done(function () {
+            var $cuisine = $('#cuisine').val();
+            var miles = $('#radius').val();
+            var radius = getRadius(miles);
+            // Compiles a list of restaurants based on criteria
+            getRestaurant(lat, long, radius, $cuisine);
+        });
+    });
+
+    // Submits form with Enter key
+    $("#form").keydown(function (event) {
+        if (event.keyCode == 13) {
+            $("#search").click();
+        }
+    });
 });
 
-function getMap(lat, long){
+function getMap(lat, long) {
     // Shows map centered on Portland, OR
     var place = {lat: lat, lng: long};
     var map = new google.maps.Map(document.getElementById('googleMap'), {
@@ -199,5 +272,3 @@ function getMap(lat, long){
 
     });
 }
-
-

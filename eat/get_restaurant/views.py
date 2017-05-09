@@ -9,7 +9,8 @@ from django.contrib.auth.decorators import login_required
 def return_restaurant(request):
 
     template = 'search.html'
+    context = {
 
-    return render(request, template)
+    }
 
-
+    return render(request, template, context)

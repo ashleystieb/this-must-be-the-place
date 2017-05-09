@@ -4,6 +4,8 @@
 
 {% block head %}
     {{ block.super }}
+    <meta charset="UTF-8">
+{#    <meta name="viewport" content="width=device-width, initial-scale=1">#}
     <title>THIS MUST BE THE PLACE</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -12,8 +14,9 @@
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
           crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
 
 {% endblock head %}
 
@@ -22,10 +25,10 @@
     <div class="container">
         <div class="jumbotron">
             <div class="row">
-                <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                <div class="col-md-4 col-xs-12 col-sm-4 col-lg-4">
                     <img src="{{ photo }}" alt="user photo" class="img">
                 </div>
-                <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                <div class="col-md-8 col-xs-12 col-sm-8 col-lg-8">
                     <div class="name">
                         <h1>Hello {{ user.first_name }} {{ user.last_name }}</h1>
                         <hr>
@@ -44,9 +47,26 @@
                     <div id="edit">
                         <a href="{% url 'edit_profile' username=user.username %}">Edit Info</a>
                     </div>
+                    <div id="favorites">
+                        <h4>Saved Restaurants</h4>
+                        <ul id="favorites_ul">
+
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Script Tags -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD64gDwd84RCIDl3eNnpmzsvPD8u2u_UpY&libraries=places&callback=getMap"
+            async defer></script>
+    <script type="text/javascript" src="{% static 'js/get_restaurant.js' %}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
 {% endblock content %}
+

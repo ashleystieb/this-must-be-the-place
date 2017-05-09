@@ -32,8 +32,9 @@
             <input name='email' type="text" class="form-control" placeholder="E-mail address" required="" autofocus=""><br>
             <input name='password1' type="password" class="form-control" placeholder="Password" required="">
             Your password must contain at least 8 characters.<br><br>
-            <input name='password2' type="password" class="form-control" placeholder="Password confirmation" required="">
+            <input name='password2' type="password" class="form-control" placeholder="Password confirmation" required="" onChange="checkPasswordMatch()">
             Enter the same password as before, for verification.<br><br>
+            <div id="divCheckPasswordMatch"></div><br><br>
             <button class="btn btn-lg btn-default btn-block" type="submit">
                 Register
             </button>

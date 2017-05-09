@@ -4,7 +4,6 @@
 
 $(document).ready(function () {
 
-
     $(function () {
         /* START OF DEMO JS - NOT NEEDED */
         if (window.location == window.parent.location) {

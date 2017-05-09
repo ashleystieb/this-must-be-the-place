@@ -9,81 +9,145 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>THIS MUST BE THE PLACE</title>
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+          crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/get_restaurant_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+
 
 {% endblock head %}
 
 {% block content %}
     {{ block.super }}
-    <div class="container">
-    <div class="jumbotron">
-    <div class="page-header">
-        <h1>THIS MUST BE THE PLACE</h1>
-    </div><br>
-    <div class="input">
-        <label class="control-label" for="formGroupInputLarge"><span
-                class="glyphicon glyphicon-map-marker"></span> What is your location?</label>
-        <input id="location" class="form-control input-lg" placeholder="City, State"><br><br>
-        <label class="control-label" for="formGroupInputLarge"><span
-                class="glyphicon glyphicon-cutlery"></span> What are you in the mood for?</label>
-        <input id="cuisine" class="form-control input-lg" placeholder="Mexican, Thai, Italian, etc."><br><br>
-        <div class="form-group">
-            <label for="price"><span class="glyphicon glyphicon-usd"></span> What is your price range?</label>
-            <select class="form-control input-lg" id="price">
-                <option>$</option>
-                <option>$$</option>
-                <option>$$$</option>
-            </select>
-            <br><br>
-            <button id="submit" type="button" class="btn btn-default btn-lg" data-toggle="modal"
-                    data-target=".bs-example-modal-lg"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> SUBMIT
-            </button>
-            <a href="javascript:location.reload(true)">
-                <button id="refresh" type="button" class="btn btn-default btn-lg"><span
-                        class="glyphicon glyphicon-refresh"></span></button>
-            </a>
-            <br><br>
-            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-                            <h1 id="name" class="modal-title"></h1>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container-fluid">
-                                <div class="col-md-8">
-                                    <img id="image" class="img-thumbnail" src="">
-
-                                </div>
-                                <div class="col-md-4">
-
-                                    <div id="address"></div>
-                                    <div id="website" style="display: none">
-                                        <a id="web" href="" target="_blank">Visit Website</a>
-                                    </div>
-                                    <br><br>
-                                    <div id="googleMap" style="display: none"></div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
+    <div id="fullscreen_bg" class="fullscreen_bg">
+        <div class="container">
+            <div class="jumbotron">
+                <div class="page-header">
+                    <h1>THIS MUST BE THE PLACE</h1>
                 </div>
-                <div id="blank" style="display: none"></div>
-                <div id="blank2" style="display: none"></div>
+                <br>
+                <div class="input">
+                    <form id="form" action="" method="post" autocomplete="on">
+                        <label class="control-label" for="formGroupInputLarge"><span
+                                class="glyphicon glyphicon-globe"></span> What is your location?</label>
+                        <input id="location" class="form-control input-lg" placeholder="City, State/Country or Address"><br><br>
+                        <label class="control-label" for="formGroupInputLarge"><span
+                                class="glyphicon glyphicon-cutlery"></span> What are you in the mood for?</label>
+                        <input id="cuisine" list="cuisines" class="form-control input-lg"
+                               placeholder="Mexican, Thai, Italian, etc.">
+                        <datalist id="cuisines">
+                            <option value="Mexican">
+                            <option value="Italian">
+                            <option value="Japanese">
+                            <option value="Chinese">
+                            <option value="Barbeque">
+                            <option value="French">
+                            <option value="Pizza">
+                            <option value="Thai">
+                            <option value="Indian">
+                            <option value="Middle Eastern">
+                            <option value="Cocktails">
+                            <option value="Spanish">
+                            <option value="Soul Food">
+                            <option value="Sushi">
+                            <option value="Ethiopian">
+                            <option value="Vietnamese">
+                            <option value="American">
+                            <option value="Frozen Yogurt">
+                            <option value="Russian">
+                        </datalist>
+                        <br><br>
+                        <div class="form-group">
+                            <label for="radius"><span class="glyphicon glyphicon-map-marker"></span> What is your
+                                maximum radius
+                                (miles)?</label>
+                            <select class="form-control input-lg" id="radius">
+                                <option>1</option>
+                                <option>5</option>
+                                <option>10</option>
+                                <option>15</option>
+                                <option>20</option>
+                                <option>25</option>
+                                <option>30</option>
+                            </select><br><br>
+                            <div class="form-group">
+                                <label for="price"><span class="glyphicon glyphicon-usd"></span> What is your price
+                                    range?</label>
+                                <select class="form-control input-lg" id="price">
+                                    <option>$</option>
+                                    <option>$$</option>
+                                </select>
+                                <br><br>
+                                <button id="search" type="button" class="btn btn-default btn-lg" data-toggle="modal"
+                                        data-target=".bs-example-modal-lg"><span class="glyphicon glyphicon-thumbs-up"
+                                                                                 aria-hidden="true"></span> SUBMIT
+                                </button>
+                                <a href="javascript:location.reload(true)">
+                                    <button id="refresh" type="button" class="btn btn-default btn-lg"><span
+                                            class="glyphicon glyphicon-refresh"></span></button>
+                                </a>
+                                <br><br>
+                                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                                     aria-labelledby="myLargeModalLabel">
+
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button id="save" type="button"
+                                                        class="btn btn-danger btn-xs">&hearts;</button>
+
+                                                <button type="button" class="close"
+                                                        data-dismiss="modal">&times;</button>
+
+                                                <h1 id="name" class="modal-title"></h1>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container-fluid">
+                                                    <div class="col-md-8">
+                                                        <img id="image" class="img-thumbnail" src="">
+                                                        <br><br>
+                                                        <div id="review"></div>
+                                                    </div>
+                                                    <div class="col-md-4">
+
+                                                        <div id="address"></div>
+                                                        <br>
+                                                        <div id="phone"></div>
+                                                        <div id="website" style="display: none">
+                                                            <a id="web" href="" target="_blank">Visit Website</a>
+                                                        </div>
+                                                        <br><br>
+                                                        <div id="hours"></div>
+                                                        <br><br>
+                                                        <div id="googleMap" style="display: none"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button id="next" type="button" class="btn btn-default">Next
+                                                    </button>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="blank" style="display: none"></div>
+                                    <div id="blank2" style="display: none"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 
 
@@ -95,6 +159,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
+
 
 
     <!-- Keys
