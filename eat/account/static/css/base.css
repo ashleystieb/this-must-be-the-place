@@ -31,3 +31,25 @@ h2 {
     background-color: rgba(255, 255, 255, 0.9);
     border: 1px solid #EF5E7B;
 }
+
+#image {
+    border: 1px solid #E1E1E1;
+}
+
+footer {
+    color: #EF5E7B;
+    font-size: 15px;
+    text-align: center;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+
+}
+
+footer a {
+    color: #EF5E7B;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #717171;
+    text-decoration: none;
+}

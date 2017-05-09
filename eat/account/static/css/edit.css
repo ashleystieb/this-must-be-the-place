@@ -4,10 +4,6 @@ body {
     background: url('/static/img/theplace_pattern.png');
 }
 
-.jumbotron {
-    margin: 100px;
-    background-color: white;
-}
 
 .btn {
     outline: 0;
@@ -26,12 +22,10 @@ body {
 }
 
 .fullscreen_bg {
-    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: #E1E1E1;
 
 }
 

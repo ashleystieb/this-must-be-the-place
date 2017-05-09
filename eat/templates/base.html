@@ -6,6 +6,7 @@
 <head>
     {% block head %}
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>THIS MUST BE THE PLACE</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -23,30 +24,35 @@
 
 {% block content %}
     <nav class="navbar navbar-right navbar-minimal animate" role="navigation">
-    	<div class="navbar-toggler animate">
+        <div class="navbar-toggler animate">
             <span class="menu-icon"></span></div>
         <ul class=" navbar-menu animate">
-                <li><a href="{% url 'index' %}">THIS MUST BE THE PLACE</a></li>
+            <li><a href="{% url 'index' %}">THIS MUST BE THE PLACE</a></li>
             {% if user.is_authenticated %}
-    			<li><a href="{% url 'search' %}">Search</a></li>
-				<li ><a href="{% url 'profile' username=user.username %}">Profile</a></li>
-				<li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="{% url 'search' %}">Search</a></li>
+                <li><a href="{% url 'profile' username=user.username %}">Profile</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
             {% else %}
                 <li><a href="{% url 'register' %}">Register</a></li>
                 <li><a href="{% url 'user_login' %}">Login</a></li>
             {% endif %}
 
         </ul>
-</nav>
+    </nav>
 
 {% endblock content %}
 
-  <!-- Script Tags -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+<footer>
+    <p> Copyright © 2017 <a href="https://github.com/ashleystieb" target="_blank">Ashley Stieb</a> // Art by <a href="http://pacetaylor.virb.com/" target="_blank">Pace Taylor</a></p>
+
+</footer>
+
+<!-- Script Tags -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>
