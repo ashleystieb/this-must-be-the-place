@@ -23,8 +23,12 @@
     {{ block.super }}
     <div class="container">
         <div class="jumbotron">
+            <div class="header">
+                <img src="/static/img/theplace_logo.png" alt="logo" class="img-responsive center-block">
+                <br><br>
+            </div>
             <form class="form-edit" action="" method="POST" enctype="multipart/form-data">
-                <h1 class="form-edit-heading text-muted">EDIT PROFILE</h1>
+                <h2 class="form-edit-heading text-muted">EDIT PROFILE</h2>
                 <br><br>
                 {% csrf_token %}
                 City: <input name='city' type="text" class="form-control" placeholder="City" autofocus="">

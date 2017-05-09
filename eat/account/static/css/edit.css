@@ -1,7 +1,7 @@
 body {
     padding-top: 0;
     padding-bottom: 40px;
-    background-color: #E1E1E1;
+    background: url('/static/img/theplace_pattern.png');
 }
 
 .jumbotron {

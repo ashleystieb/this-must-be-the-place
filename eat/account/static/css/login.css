@@ -1,6 +1,8 @@
 body {
     padding-bottom: 40px;
-    background-color: #E1E1E1;
+    background: url('/static/img/theplace_pattern.png');
+    background-position: fixed;
+    background-attachment: fixed;
 }
 
 .btn {
@@ -20,23 +22,16 @@ body {
 }
 
 .fullscreen_bg {
-    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background-size: cover;
-    background-position: 50% 50%;
-    background-repeat: repeat;
-    background-color: #E1E1E1;
-
 }
 
 .form-signin {
     max-width: 280px;
     padding: 15px;
     margin: 0 auto;
-    /*margin-top: 50px;*/
 }
 
 .form-signin .form-signin-heading, .form-signin {
@@ -106,6 +101,5 @@ select:-webkit-autofill:focus {
 }
 
 .jumbotron {
-    margin: 100px;
     background-color: white;
 }

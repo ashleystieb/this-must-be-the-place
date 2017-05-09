@@ -20,37 +20,6 @@ $(document).ready(function () {
     var restaurantsHigh = [];
     var saved = [];
 
-    // Datalist storage
-    var cuisineList = document.getElementById('cuisines');
-    var cuisineInput = document.getElementById('cuisine');
-    var request = new XMLHttpRequest();
-
-    // Handle state changes for the request.
-    request.onreadystatechange = function (response) {
-        if (request.readyState === 4) {
-            if (request.status === 200) {
-                // Parse the JSON
-                var jsonOptions = JSON.parse(request.responseText);
-
-                // Loop over the JSON array.
-                jsonOptions.forEach(function (item) {
-                    // Create a new <option> element.
-                    var option = document.createElement('option');
-                    // Set the value using the item in the JSON array.
-                    option.value = item;
-                    // Add the <option> element to the <datalist>.
-                    cuisineList.appendChild(option);
-                });
-
-                // Update the placeholder text.
-                cuisineInput.placeholder = "Mexican, Thai, Pizza, etc.";
-            } else {
-                // An error occurred
-                cuisineInput.placeholder = "Couldn't load datalist options";
-            }
-        }
-    };
-
     console.log('JavaScript detected');
     if (jQuery) {
         console.log('jQuery detected');
@@ -81,15 +50,13 @@ $(document).ready(function () {
             'radius': radius,
             'type': 'restaurant',
             'keyword': keyword,
-            'key': 'AIzaSyD64gDwd84RCIDl3eNnpmzsvPD8u2u_UpY',
+            'key': 'AIzaSyD64gDwd84RCIDl3eNnpmzsvPD8u2u_UpY'
         };
         service = new google.maps.places.PlacesService($('#blank').get(0));
         service.nearbySearch(params, function (results, status) {
 
 
             // Checks price range for each result and adds to corresponding list
-
-            // console.log(results);
 
 
             for (i in results) {
@@ -115,13 +82,7 @@ $(document).ready(function () {
             var $price = $('#price').val();
             var place = getResult($price);
 
-            $('#save').on('click', function () {
-                saved.push(place);
-                alert('Saved to favorites!');
-                console.log(saved);
-                $('#favorites_ul').html(saved);
 
-            });
 
             // Gets photo from randomly chosen restaurant
 
@@ -139,8 +100,18 @@ $(document).ready(function () {
             $('#googleMap').css({'display': 'block'});
             getMap(lat, long);
 
+
         });
     }
+
+    // Adds autocomplete to the location input
+    function autocompleteLocation() {
+
+        var input = document.getElementById('location');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+    }
+
+    google.maps.event.addDomListener(window, 'load', autocompleteLocation);
 
     // Gets details of randomly selected restaurant
     function getPlaceDetails(placeid) {
@@ -152,6 +123,7 @@ $(document).ready(function () {
         service.getDetails(params, function (results, status) {
 
             console.log(results);
+
 
             // Adds address to website
             if (results.hasOwnProperty('adr_address')) {
@@ -181,9 +153,33 @@ $(document).ready(function () {
                 $('#phone').html(results.formatted_phone_number);
             }
 
-            // if (results.hasOwnProperty('opening_hours')) {
-            //     $('#hours').html("<li>" + results.opening_hours.weekday_text + "</li>");
-            // }
+            var rating = results.rating;
+
+        if (results.hasOwnProperty('rating')) {
+
+
+            console.log(rating);
+
+            if (rating === 0 && rating <= parseFloat(1.4)) {
+                $('#rating').attr('src', "/static/img/one.png");
+
+            } else if (rating > parseFloat(1.5) && rating <= parseFloat(2.4)) {
+                $('#rating').attr('src', "/static/img/two.png");
+
+            } else if (rating > parseFloat(2.5) && rating <= parseFloat(3.4)) {
+                $('#rating').attr('src', "/static/img/three.png");
+
+            } else if (rating > parseFloat(3.5) && rating <= parseFloat(4.4)) {
+                $('#rating').attr('src', "/static/img/four.png");
+
+            } else if (rating > parseFloat(4.5) && rating <= 5) {
+                $('#rating').attr('src', "/static/img/five.png");
+            }
+
+        } else {
+            $('#ratings').html('No rating.');
+        }
+
         });
     }
 
@@ -194,6 +190,33 @@ $(document).ready(function () {
         return meters
     }
 
+    // function getRating(rating) {
+    //
+    //     if (results.hasOwnProperty('rating')) {
+    //
+    //         console.log(rating);
+    //
+    //         if (rating === 0 || rating <= 1) {
+    //             $('#rating').attr('src', "{% static one.png %}");
+    //
+    //         } else if (rating > 1 || rating <= 2) {
+    //             $('#rating').attr('src', "{% static two.png %}");
+    //
+    //         } else if (rating > 2 || rating <= 3) {
+    //             $('#rating').attr('src', "{% static three.png %}");
+    //
+    //         } else if (rating > 3 || rating <= 4) {
+    //             $('#rating').attr('src', "{% static four.png %}");
+    //
+    //         } else if (rating > 4 || rating <= 5) {
+    //             $('#rating').attr('src', "{% static five.png %}");
+    //         }
+    //
+    //     } else {
+    //         $('#ratings').html('No rating.');
+    //
+    //     }
+    // }
 
     function getResult(price) {
 
@@ -256,6 +279,38 @@ $(document).ready(function () {
             $("#search").click();
         }
     });
+
+    // Datalist storage
+    var cuisineList = document.getElementById('cuisines');
+    var cuisineInput = document.getElementById('cuisine');
+    var request = new XMLHttpRequest();
+
+    // Handle state changes for the request.
+    request.onreadystatechange = function (response) {
+        if (request.readyState === 4) {
+            if (request.status === 200) {
+                // Parse the JSON
+                var jsonOptions = JSON.parse(request.responseText);
+
+                // Loop over the JSON array.
+                jsonOptions.forEach(function (item) {
+                    // Create a new <option> element.
+                    var option = document.createElement('option');
+                    // Set the value using the item in the JSON array.
+                    option.value = item;
+                    // Add the <option> element to the <datalist>.
+                    cuisineList.appendChild(option);
+                });
+
+                // Update the placeholder text.
+                cuisineInput.placeholder = "Mexican, Thai, Pizza, etc.";
+            } else {
+                // An error occurred
+                cuisineInput.placeholder = "Couldn't load datalist options";
+            }
+        }
+    };
+
 });
 
 function getMap(lat, long) {

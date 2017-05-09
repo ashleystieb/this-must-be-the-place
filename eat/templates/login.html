@@ -13,6 +13,8 @@
           crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
 
 
 
@@ -22,21 +24,25 @@
 {% block content %}
     {{ block.super }}
     <div id="fullscreen_bg" class="fullscreen_bg">
-    <div class="container">
-    <div class="jumbotron">
-
-        <form class="form-signin" action="{% url 'user_login' %}" method="POST">
-            {% csrf_token %}
-            <h1 class="form-signin-heading text-muted">LOGIN</h1><br>
-            <input name='username' type="text" class="form-control" placeholder="Username" required="" autofocus="">
-            <input name='password' type="password" class="form-control" placeholder="Password" required="">
-            <button class="btn btn-lg btn-default btn-block" type="submit">
-                Login
-            </button>
-            <a href="{% url 'register' %}">Not registered? Create an account.</a>
-        </form>
-    </div>
-    </div>
+        <div class="container">
+            <div class="jumbotron">
+            <div class="header">
+                <img src="/static/img/theplace_logo.png" alt="logo" class="img-responsive center-block">
+                <br><br>
+            </div>
+                <form class="form-signin" action="{% url 'user_login' %}" method="POST">
+                    {% csrf_token %}
+                    <h2 class="form-signin-heading text-muted">LOGIN</h2><br>
+                    <input name='username' type="text" class="form-control" placeholder="Username" required=""
+                           autofocus="">
+                    <input name='password' type="password" class="form-control" placeholder="Password" required="">
+                    <button class="btn btn-lg btn-default btn-block" type="submit">
+                        Login
+                    </button>
+                    <a href="{% url 'register' %}">Not registered? Create an account.</a>
+                </form>
+            </div>
+        </div>
     </div>
 
 {% endblock content %}

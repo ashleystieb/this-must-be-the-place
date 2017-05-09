@@ -1,7 +1,9 @@
 body {
     padding-top: 0;
     padding-bottom: 40px;
-    background-color: #E1E1E1;
+    background: url('/static/img/theplace_pattern.png');
+    background-position: fixed;
+    background-attachment: fixed;
 }
 
 .btn {
@@ -26,8 +28,6 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: #E1E1E1;
-
 }
 
 .form-register {
@@ -97,6 +97,7 @@ select:-webkit-autofill:focus {
 }
 
 .jumbotron {
-    margin: 100px;
-    background-color: white;
+    margin: 40px;
+    margin-top: 70px;
+    background-color: rgba(255, 255, 255, 0.9);
 }

@@ -1,0 +1,10 @@
+body {
+    background: url('/static/img/theplace_pattern.png');
+    background-position: fixed;
+    background-attachment: fixed;
+}
+
+.about {
+    text-align: justify;
+}
+

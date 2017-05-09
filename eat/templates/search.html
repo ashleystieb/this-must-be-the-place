@@ -16,8 +16,8 @@
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
           crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/get_restaurant_styles.css' %}">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
 
 
@@ -29,9 +29,10 @@
     <div id="fullscreen_bg" class="fullscreen_bg">
         <div class="container">
             <div class="jumbotron">
-                <div class="page-header">
-                    <h1>THIS MUST BE THE PLACE</h1>
-                </div>
+            <div class="header">
+                <img src="/static/img/theplace_logo.png" alt="logo" class="img-responsive center-block">
+                <br><br>
+            </div>
                 <br>
                 <div class="input">
                     <form id="form" action="" method="post" autocomplete="on">
@@ -61,7 +62,7 @@
                             <option value="Vietnamese">
                             <option value="American">
                             <option value="Frozen Yogurt">
-                            <option value="Russian">
+                            <option value="Ice cream">
                         </datalist>
                         <br><br>
                         <div class="form-group">
@@ -111,12 +112,16 @@
                                             <div class="modal-body">
                                                 <div class="container-fluid">
                                                     <div class="col-md-8">
-                                                        <img id="image" class="img-thumbnail" src="">
+                                                        <img id="image" class="img-thumbnail img-responsive center-block" src="" alt="restaurant image">
                                                         <br><br>
                                                         <div id="review"></div>
+                                                        <br><br>
                                                     </div>
                                                     <div class="col-md-4">
-
+                                                        <div id="ratings">
+                                                            <img id="rating" class="img-responsive" src="" alt="rating">
+                                                        </div>
+                                                        <br>
                                                         <div id="address"></div>
                                                         <br>
                                                         <div id="phone"></div>
@@ -124,9 +129,7 @@
                                                             <a id="web" href="" target="_blank">Visit Website</a>
                                                         </div>
                                                         <br><br>
-                                                        <div id="hours"></div>
-                                                        <br><br>
-                                                        <div id="googleMap" style="display: none"></div>
+                                                        <div id="googleMap" style="display: none"></div><br><br>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
