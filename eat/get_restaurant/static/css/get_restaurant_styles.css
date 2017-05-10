@@ -140,6 +140,7 @@ select:-webkit-autofill:focus {
 }
 
 #heart {
+    color: #EE5F7A;
     border: 0;
     background: white;
 }

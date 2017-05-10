@@ -50,18 +50,42 @@
                             </li>
                         </ul>
                     </div>
-                    <div id="edit">
-                        <strong><a href="{% url 'edit_profile' username=user.username %}">Edit Info</a></strong>
-                    </div>
+                    {% if request.user.is_authenticated and profile.user == request.user %}
+                        <div id="edit">
+                            <strong><a href="{% url 'edit_profile' username=user.username %}">Edit Info</a></strong>
+                        </div>
+                    {% else %}
+                    {% endif %}
+
                     <div id="favorites">
                         <h4>Saved Places</h4>
-                        <ul id="favorites_ul">
+                    {% if request.user.is_authenticated and profile.user == request.user %}
 
-                        </ul>
+                        {% for res in query %}
+
+                            <h5>
+                                <a id="delete" href="{% url 'delete' res.id %}">&times;</a> <a href="{{ res.website }}" target="_blank">{{ res.name }}</a>
+                            </h5>
+
+                        {% endfor %}
+                        {% else %}
+
+                        {% for res in query %}
+
+                            <h5>
+                                &times; <a href="{{ res.website }}" target="_blank">{{ res.name }}</a>
+                            </h5>
+
+                        {% endfor %}
+                        {% endif %}
+
+
+
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <!-- Script Tags -->

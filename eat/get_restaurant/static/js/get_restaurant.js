@@ -13,6 +13,38 @@
 $(document).ready(function () {
 
 
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    var csrftoken = getCookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+
     // Global variables
     var lat;
     var long;
@@ -81,7 +113,6 @@ $(document).ready(function () {
 
             var $price = $('#price').val();
             var place = getResult($price);
-
 
 
             // Gets photo from randomly chosen restaurant
@@ -155,30 +186,30 @@ $(document).ready(function () {
 
             var rating = results.rating;
 
-        if (results.hasOwnProperty('rating')) {
+            if (results.hasOwnProperty('rating')) {
 
 
-            console.log(rating);
+                console.log(rating);
 
-            if (rating === 0 && rating <= parseFloat(1.4)) {
-                $('#rating').attr('src', "/static/img/one.png");
+                if (rating === 0 && rating <= parseFloat(1.4)) {
+                    $('#rating').attr('src', "/static/img/one.png");
 
-            } else if (rating > parseFloat(1.5) && rating <= parseFloat(2.4)) {
-                $('#rating').attr('src', "/static/img/two.png");
+                } else if (rating >= parseFloat(1.5) && rating <= parseFloat(2.4)) {
+                    $('#rating').attr('src', "/static/img/two.png");
 
-            } else if (rating > parseFloat(2.5) && rating <= parseFloat(3.4)) {
-                $('#rating').attr('src', "/static/img/three.png");
+                } else if (rating >= parseFloat(2.5) && rating <= parseFloat(3.4)) {
+                    $('#rating').attr('src', "/static/img/three.png");
 
-            } else if (rating > parseFloat(3.5) && rating <= parseFloat(4.4)) {
-                $('#rating').attr('src', "/static/img/four.png");
+                } else if (rating >= parseFloat(3.5) && rating <= parseFloat(4.4)) {
+                    $('#rating').attr('src', "/static/img/four.png");
 
-            } else if (rating > parseFloat(4.5) && rating <= 5) {
-                $('#rating').attr('src', "/static/img/five.png");
+                } else if (rating >= parseFloat(4.5) && rating <= 5) {
+                    $('#rating').attr('src', "/static/img/five.png");
+                }
+
+            } else {
+                $('#ratings').html('No rating.');
             }
-
-        } else {
-            $('#ratings').html('No rating.');
-        }
 
         });
     }
@@ -190,33 +221,6 @@ $(document).ready(function () {
         return meters
     }
 
-    // function getRating(rating) {
-    //
-    //     if (results.hasOwnProperty('rating')) {
-    //
-    //         console.log(rating);
-    //
-    //         if (rating === 0 || rating <= 1) {
-    //             $('#rating').attr('src', "{% static one.png %}");
-    //
-    //         } else if (rating > 1 || rating <= 2) {
-    //             $('#rating').attr('src', "{% static two.png %}");
-    //
-    //         } else if (rating > 2 || rating <= 3) {
-    //             $('#rating').attr('src', "{% static three.png %}");
-    //
-    //         } else if (rating > 3 || rating <= 4) {
-    //             $('#rating').attr('src', "{% static four.png %}");
-    //
-    //         } else if (rating > 4 || rating <= 5) {
-    //             $('#rating').attr('src', "{% static five.png %}");
-    //         }
-    //
-    //     } else {
-    //         $('#ratings').html('No rating.');
-    //
-    //     }
-    // }
 
     function getResult(price) {
 
@@ -278,6 +282,35 @@ $(document).ready(function () {
         if (event.keyCode == 13) {
             $("#search").click();
         }
+    });
+
+    $('#heart').on('click', function () {
+        var name = $('#name').text();
+        console.log(name);
+        var website = $('#web').attr('href');
+        console.log(website);
+
+        var data = {
+            name: name,
+            website: website
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: 'saved/',
+            data: data,
+            success: function (response) {
+                if (response.results === 'fail') {
+                    swal('Already saved!', '', 'error');
+                } else {
+                    console.log(response);
+                    swal('Saved!', '', 'success');
+                }
+            },
+            error: function (message) {
+                console.log(message);
+            }
+        })
     });
 
     // Datalist storage

@@ -5,6 +5,8 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Account, Profile
 from .forms import ProfileEdit
+from restaurant.models import Restaurant
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -97,6 +99,7 @@ def profile_view(request, username):
     city = profile.city
     state = profile.state
     country = profile.country
+    query = Restaurant.objects.all().filter(user=user)
 
     template = 'profile.html'
 
@@ -107,6 +110,7 @@ def profile_view(request, username):
         'city': city,
         'state': state,
         'country': country,
+        'query': query
     }
 
     return render(request, template, context)
@@ -142,3 +146,27 @@ def edit_profile(request, username):
 
     return render(request, 'edit_profile.html', context)
 
+
+def save_view(request):
+
+    name = request.POST['name']
+    website = request.POST['website']
+    user = request.user
+
+    restaurants = Restaurant.objects.all().filter(user=user)
+    for i in restaurants:
+        if i.name == name:
+            return JsonResponse({'results': 'fail'})
+    else:
+        instance = Restaurant(name=name, website=website, user=user)
+        instance.save()
+
+        return JsonResponse({'results': 'success'})
+
+
+def delete_view(request, pk):
+
+    query = Restaurant.objects.all().get(pk=pk)
+    query.delete()
+
+    return redirect('/profile/{}'.format(request.user.username))

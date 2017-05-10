@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from restaurant import views as restaurant_views
 from get_restaurant import views as result_views
-from account.views import login_view, create_person, logout_view, profile_view, index_view, edit_profile
+from account.views import login_view, create_person, logout_view, profile_view, index_view, edit_profile, save_view, delete_view
 from eat import settings
 
 
@@ -32,5 +32,7 @@ urlpatterns = [
     url(r'^logout/$', logout_view, name='logout'),
     url(r'^profile/(?P<username>[\w.@+-]+)/$', profile_view, name='profile'),
     url(r'^profile/(?P<username>[\w.@+-]+)/edit/$', edit_profile, name='edit_profile'),
+    url(r'^search/saved/$', save_view, name='save'),
+    url(r'^delete/(?P<pk>\d+)/$', delete_view, name='delete'),
     url(r'^$', index_view, name='index'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
