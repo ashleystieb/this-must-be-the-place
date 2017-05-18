@@ -83,12 +83,17 @@ $(document).ready(function () {
             'type': 'restaurant',
             'keyword': keyword,
             'key': 'AIzaSyD64gDwd84RCIDl3eNnpmzsvPD8u2u_UpY'
+            // 'page_token': 'next_page_token'
         };
+
+
         service = new google.maps.places.PlacesService($('#blank').get(0));
         service.nearbySearch(params, function (results, status) {
 
 
             // Checks price range for each result and adds to corresponding list
+
+            console.log(results);
 
 
             for (i in results) {
@@ -104,6 +109,7 @@ $(document).ready(function () {
                     restaurantsLow.push(results[i]);
                 }
             }
+
 
             // console.log(restaurantsLow);
             // console.log(restaurantsHigh);
@@ -134,6 +140,7 @@ $(document).ready(function () {
 
         });
     }
+
 
     // Adds autocomplete to the location input
     function autocompleteLocation() {
@@ -284,6 +291,17 @@ $(document).ready(function () {
         }
     });
 
+    // Press space bar to click Next button on modal
+    var link = document.getElementById("next");
+
+    document.onkeydown = function (e) {
+    if (e.keyCode == 32) {
+        link.click();
+        // Scrolls to the top of the modal
+        $('#modal').animate({ scrollTop: 0 }, 'slow');
+    }
+};
+
     $('#heart').on('click', function () {
         var name = $('#name').text();
         console.log(name);
@@ -313,7 +331,7 @@ $(document).ready(function () {
         })
     });
 
-    // Datalist storage
+    // Datalist storage for cuisine options
     var cuisineList = document.getElementById('cuisines');
     var cuisineInput = document.getElementById('cuisine');
     var request = new XMLHttpRequest();

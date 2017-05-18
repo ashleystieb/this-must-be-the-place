@@ -18,7 +18,8 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from restaurant import views as restaurant_views
 from get_restaurant import views as result_views
-from account.views import login_view, create_person, logout_view, profile_view, index_view, edit_profile, save_view, delete_view
+from account.views import (login_view, create_person, logout_view, profile_view,
+                           index_view, edit_profile, save_view, delete_view)
 from eat import settings
 
 
